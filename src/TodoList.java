@@ -79,9 +79,6 @@ class TodoList {
 //		Scanner scannerPriority = new Scanner(System.in);
 		int sPriority = Integer.parseInt(scanner.nextLine());	
 		task.setPriority(sPriority);
-		System.out.println("Enter the time in the format HH:MM");
-		Date date = format.parse(scanner.nextLine());
-		task.setDate(date);
 //		scannerPriority.close();
 		tasks.add(task);		
 		System.out.println("You have added a new task successfully.");
