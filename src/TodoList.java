@@ -12,21 +12,23 @@ import java.util.Scanner;
 class TodoList {
 	private ArrayList <Task> tasks;
 	private Task task;
+	private FinishedTasks finishedTasks;
 	SimpleDateFormat format = new SimpleDateFormat ("hh:mm");
 	
 	public TodoList(){
 		tasks = new ArrayList<Task>();
+		finishedTasks = new FinishedTasks();
 	}
 
 	public void mainToDo() throws IOException, ParseException {
 		boolean b = true;
-		System.out.println("What would you like to do? Type the number of the task you want.\n1- Add a new task.\n2- Show your Tasks.\n3- Delete a task.\n4- Save.\n5- Print saved tasks.\n6- Move a method to Finished\n7- Exit");
+		System.out.println("What would you like to do? Type the number of the task you want.\n1- Add a new task.\n2- Show your Tasks.\n3- Delete a task.\n4- Save.\n5- Print saved tasks.\n6- Move a task to Finished.\n7- Show finished tasks.\n8- Exit");
 		
 		while (b) {
 			try {	
 				Scanner scanner1 = new Scanner(System.in);
 				int n = Integer.parseInt(scanner1.nextLine());
-				if (n>0&&n<8) {
+				if (n>0&&n<9) {
 					b = false;
 					if(n==1){
 						addTask();
@@ -47,13 +49,16 @@ class TodoList {
 						moveToFinished();
 					}
 					else if (n==7){
+						showFinished();
+					}
+					else if(n==8){
 						
 					}
 				} else {
-					System.out.println(n + " Isn't a valid option... please enter a number between 1 and 7");
+					System.out.println(n + " Isn't a valid option... please enter a number between 1 and 8");
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Enter a number between 1 to 6 please...");	
+				System.out.println("Enter a number between 1 to 8 please...");	
 			}
 		}		
 	}
@@ -78,9 +83,7 @@ class TodoList {
 		Date date = format.parse(scanner.nextLine());
 		task.setDate(date);
 //		scannerPriority.close();
-		tasks.add(task);
-		
-		
+		tasks.add(task);		
 		System.out.println("You have added a new task successfully.");
 		mainToDo();
 	}
@@ -109,10 +112,9 @@ class TodoList {
 	public void printTask2(){
 	for(int i = 0; i<tasks.size();i++){
 		System.out.println(i+1+"- "+ tasks.get(i).print());
+	}		
 	}
-		
-	}
-	
+
 	public void save() throws IOException, ParseException {
 		try{
 			FileOutputStream fileOut = new FileOutputStream("/afs/kth.se/home/tmp/1016/tmp-sda-1128/workspace/Roody/save.ser");
@@ -148,10 +150,20 @@ class TodoList {
 		mainToDo();
 		
 	}
-	public void moveToFinished(){
-		
+	public void moveToFinished() throws IOException, ParseException{
+		System.out.println("Type the number of the task you want to move to Finished tasks");
+		printTask2();
+		Scanner scannerDelete = new Scanner(System.in);
+		int number = Integer.parseInt(scannerDelete.nextLine());
+		finishedTasks.finiTasks.add(tasks.get(number-1));
+		tasks.remove(number-1);
+		System.out.println("The task is moved");
+		mainToDo();
 	}
-
+	public void showFinished() throws IOException, ParseException{
+		finishedTasks.printFinished();
+		mainToDo();
+	}
 }
 
 

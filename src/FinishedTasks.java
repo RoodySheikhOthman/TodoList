@@ -2,9 +2,14 @@ import java.util.ArrayList;
 
 
 public class FinishedTasks {
-	private ArrayList <Task> finishedTasks;
+	public ArrayList <Task> finiTasks;
 	public FinishedTasks(){
-		finishedTasks = new ArrayList<Task>();
+		finiTasks = new ArrayList<Task>();
 	}
-	
-}
+	public void printFinished(){
+		for(int i = 0; i<finiTasks.size();i++){
+			System.out.println(i+1+"- "+ finiTasks.get(i).print());
+		}
+		}
+	}
+
