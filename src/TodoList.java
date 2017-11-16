@@ -128,6 +128,16 @@ class TodoList {
 		catch(IOException e){
 			e.printStackTrace();
 		}
+		try{
+			FileOutputStream fileOutFinished = new FileOutputStream("/afs/kth.se/home/tmp/1016/tmp-sda-1128/workspace/Roody/saveFinished.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOutFinished);
+			out.writeObject(finishedTasks.finiTasks);
+			out.close();
+			fileOutFinished.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 		mainToDo();
 	}
 	public void printFromSaved() throws IOException, ParseException{
@@ -146,6 +156,19 @@ class TodoList {
 		}
 		for(Task task:tasks){
 			System.out.println( task.print());
+		}
+		try{
+			FileInputStream fileIn = new FileInputStream("/afs/kth.se/home/tmp/1016/tmp-sda-1128/workspace/Roody/saveFinished.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			finishedTasks.finiTasks=(ArrayList<Task>)in.readObject();
+			in.close();
+			fileIn.close();
+		}
+		catch(IOException i){
+			i.printStackTrace();
+		}
+		catch(ClassNotFoundException c){
+			c.printStackTrace();
 		}
 		mainToDo();
 		
