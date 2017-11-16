@@ -1,30 +1,38 @@
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class Task {
+class Task implements Serializable{
 	private String description;
 	private String title;
-	private Date date;
-	private boolean finished;
 	private int priority;
+	private Date date;
+	private Date dateNow;
+	long diff;
+	long diffMinutes = diff / (60 * 1000) % 60;
+	long diffHours = diff / (60 * 60 * 1000) % 24;
+	SimpleDateFormat format = new SimpleDateFormat ("hh:mm");
+	long finishTime;
 	
 	public Task(String title) {
 		this.title = title;
-		finished = false;
 	}
-	public Task (String title,String description) {
-		this.title = title;
-		this.description = description;
-		finished = false;
-	}
-	public Task(String title,String description, int priority){
+	public Task(String title,String description, int priority, Date date){
 		this.title = title;
 		this.description = description;
 		this.priority=priority;
-		finished = false;
+		this.date=date;
 	}
 	
 	public String getDescription () {
 		return description;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public void setDescription (String description) {
 		this.description = description;
@@ -35,17 +43,14 @@ class Task {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
+
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 	public String print(){
-		return (title+": "+description+" - priority is "+priority);
+		dateNow = new Date();
+		diff = dateNow.getTime()-date.getTime();
+		return (title+": "+description+" - priority is "+priority+" - Time is "+format.format(date)+" Time left: "+diffHours+" "+diffMinutes);
 		
 	}
 }
