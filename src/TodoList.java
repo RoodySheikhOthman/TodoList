@@ -13,16 +13,18 @@ class TodoList {
 	private ArrayList <Task> tasks;
 	private Task task;
 	private FinishedTasks finishedTasks;
+	private int[]m;
 	SimpleDateFormat format = new SimpleDateFormat ("hh:mm");
 	
 	public TodoList(){
 		tasks = new ArrayList<Task>();
 		finishedTasks = new FinishedTasks();
+		m = new int[10];
 	}
 
 	public void mainToDo() throws IOException, ParseException {
 		boolean b = true;
-		System.out.println("What would you like to do? Type the number of the task you want.\n1- Add a new task.\n2- Show your Tasks.\n3- Delete a task.\n4- Save.\n5- Print saved tasks.\n6- Move a task to Finished.\n7- Show finished tasks.\n8- Exit");
+		System.out.println("What would you like to do? Type the number of the task you want.\n1- Add a new task.\n2- Show your tasks.\n3- Delete a task.\n4- Save.\n5- Load saved tasks.\n6- Move a task to Finished.\n7- Show finished tasks.\n8- Prioritize tasks\n9- Exit");
 		
 		while (b) {
 			try {	
@@ -51,7 +53,10 @@ class TodoList {
 					else if (n==7){
 						showFinished();
 					}
-					else if(n==8){
+					else if (n==8){
+						prioritize();
+					}
+					else if(n==9){
 						
 					}
 				} else {
@@ -182,6 +187,13 @@ class TodoList {
 	}
 	public void showFinished() throws IOException, ParseException{
 		finishedTasks.printFinished();
+		mainToDo();
+	}
+	public void prioritize() throws IOException, ParseException{
+		for (int i = 0;i<tasks.size();i++) {
+			int n =tasks.get(i).getPriority();
+			
+		}
 		mainToDo();
 	}
 }

@@ -32,10 +32,13 @@ class Task implements Serializable{
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	public int getPriority() {
+		return priority;
+	}
 	public String print(){
 				return (title+": "+description+" - priority is "+priority);
 
 		
 	}
-//	Task should be task, add edit task, 2 and 5 are the same
+//	 add edit task, 2 and 5 are the same, and priority should be deleted after it has moved to finished
 }
