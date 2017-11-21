@@ -6,7 +6,6 @@ class Task implements Serializable{
 	private String description;
 	private String title;
 	private int priority;
-	SimpleDateFormat format = new SimpleDateFormat ("yy:MM:dd:HH:mm");
 	public Task(String title) {
 		this.title = title;
 	}

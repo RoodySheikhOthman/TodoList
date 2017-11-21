@@ -14,7 +14,6 @@ class TodoList {
 	private Task task;
 	private FinishedTasks finishedTasks;
 	private int[]m;
-	SimpleDateFormat format = new SimpleDateFormat ("hh:mm");
 	
 	public TodoList(){
 		tasks = new ArrayList<Task>();
